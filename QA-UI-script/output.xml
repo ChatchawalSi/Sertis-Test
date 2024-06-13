@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.6 on win32)" generated="20240613 15:01:27.916" rpa="false" schemaversion="3">
+<suite id="s1" name="Web-Automation" source="C:\Users\mrlig\Documents\Sertis-Test\QA-UI-script\web-automation.robot">
+<test id="s1-t1" name="TS001_Verify if general shopper purchasing for 1 phone with valid information" line="31">
+<kw name="Log To Console" library="BuiltIn" type="SETUP">
+<arg>setup</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20240613 15:01:28.135" endtime="20240613 15:01:28.135"/>
+</kw>
+<kw name="Open browser and navigate to Url">
+<doc>Initiate the Suite by opening browser and validate all the required pages for execution</doc>
+<kw name="Open Browser    ${url}    ${browser}">
+<msg timestamp="20240613 15:01:28.139" level="FAIL">No keyword with name 'Open Browser    ${url}    ${browser}' found. Did you try using keyword 'SeleniumLibrary.Open Browser' and forgot to use enough whitespace between keyword and arguments?</msg>
+<status status="FAIL" starttime="20240613 15:01:28.138" endtime="20240613 15:01:28.139"/>
+</kw>
+<status status="FAIL" starttime="20240613 15:01:28.135" endtime="20240613 15:01:28.139"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn" type="TEARDOWN">
+<arg>teardown</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20240613 15:01:28.140" endtime="20240613 15:01:28.140"/>
+</kw>
+<status status="FAIL" starttime="20240613 15:01:28.134" endtime="20240613 15:01:28.141">No keyword with name 'Open Browser    ${url}    ${browser}' found. Did you try using keyword 'SeleniumLibrary.Open Browser' and forgot to use enough whitespace between keyword and arguments?</status>
+</test>
+<doc>TestCases For Purchasing Order</doc>
+<status status="FAIL" starttime="20240613 15:01:27.917" endtime="20240613 15:01:28.142"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Web-Automation">Web-Automation</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
