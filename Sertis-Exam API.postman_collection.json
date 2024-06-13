@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "075215e0-0855-4a8d-8bd4-93b4533dde4e",
+		"name": "Sertis-Exam API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11480151",
+		"_collection_link": "https://red-moon-103589.postman.co/workspace/Sertis-Exam~8fcd3768-ca02-46d4-93c6-554f23d93d88/collection/11480151-075215e0-0855-4a8d-8bd4-93b4533dde4e?action=share&source=collection_link&creator=11480151"
+	},
+	"item": [
+		{
+			"name": "Verify valid Sertis QaAPI cases",
+			"item": [
+				{
+					"name": "Get user ids",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/ids",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"ids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const resp = pm.response.json();\r",
+									"pm.environment.set(\"phone_no\", resp.phone_no);\r",
+									"pm.environment.set(\"otp\", resp.otp);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone_no\": \"020011893\",\r\n  \"otp\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verify invalid Sertis QaAPI cases",
+			"item": [
+				{
+					"name": "Get a user by wrong id - ERROR400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Message 'is contain not a valid id'\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.contain(pm.variables.get(\"invalidID\") + \" is not a valid id\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/{{invalidID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{invalidID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin user with invalid phone number - ERROR404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Message is 'User not found'\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal(\"User not found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone_no\": \"{{wrong_PhoneNo}}\",\r\n  \"otp\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin user with wrong OTP - ERROR404 Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Message is 'User not found'\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal(\"User not found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone_no\": \"020011893\",\r\n  \"otp\": \"{{wrong_otp}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
