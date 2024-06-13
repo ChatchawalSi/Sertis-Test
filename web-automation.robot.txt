@@ -1,0 +1,31 @@
+*** Settings ***
+
+| Documentation | TestCases For BPS Application
+
+| Resource  | ../modules/module.robot
+| Variables | ../pagelibraries/resources/config.py
+| Library   | SeleniumLibrary
+| Library   | Collections
+| Library   | String
+| Test Setup | Setup for Test
+| Test Teardown | Teardown for Test
+| Suite Teardown | Stop webapp and close all browsers
+
+
+*** Variables ***
+| ${root_url} | ${CONFIG.root_url}
+
+
+*** Keywords ***
+| Teardown for Test
+| | [Documentation] | On test close Capture the screenshot
+| | Run Keyword If Test Failed | Capture Page Screenshot
+| | Close Browser 
+
+
+| Open browser and Navigate to Url
+| | [Documentation] | Initiate the Suite by opening browser about:blank page
+| | ... | and validate all the required pages for execution
+| | Open Test Browser | URL=${root_url}
+
+*** Test Cases ***
